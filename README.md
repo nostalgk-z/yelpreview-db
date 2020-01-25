@@ -9,6 +9,7 @@ First things first, we need to download and install all required dependencies.
 ## Start The Server
   __Local__:    
 1. Create your own DB using postgres CLI [here](https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/)   
+  - you can download [Postico](https://eggerapps.at/postico/) to for UI Postgres Client. (Mac)
 2. In root workspace directory create `config.js` file with your PostgreSQL user credentials.       
   _config.js template_ .      
 ```
