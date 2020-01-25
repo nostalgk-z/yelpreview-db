@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import http from 'http';
 import logger from 'morgan';
+import { getUsers } from './queries';
 
 const app = express();
 
@@ -19,6 +20,7 @@ class YelpReview{
                 extended: true,
             })
         );
+        app.get('/users', getUsers);
     }
 
     listen(port){
@@ -26,7 +28,7 @@ class YelpReview{
         const configPort = process.env.PORT || port;  
         
         //create our server and listen on configPort
-        http.createServer(app).listen(configPort, () => {
+        app.listen(configPort, () => {
             console.log('App listening on port ' +  configPort);
         });
     }
