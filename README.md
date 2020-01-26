@@ -5,7 +5,8 @@ First things first, we need to download and install all required dependencies.
 
   - `brew install posgresql` or [Download Installer](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
   - `brew install node` or [Linux Install Node](https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/)
-  - `npm install -g sequelize-cli`      
+  - `npm install -g sequelize-cli`
+  - `npm install --save sequelize pg-hstore`     
   - `npm install` in workspace directory after cloning the repo.
 ## Start The Server
   __Local__:    
