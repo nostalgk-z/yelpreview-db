@@ -1,12 +1,7 @@
-import { pool } from './pg';
+import { db } from './pg';
 
 export const getUsers = (req, resp) => {
-    pool.query('SELECT * FROM users', (err, res) => {
-        if (err) {
-            console.log(err);
-        }
-        else{
-            console.log(res.rows);
-        }
-    })
+    db.any('select * from users', [true])
+      .then( res => console.log(res))
+      .catch( err => console.log(err));
 }

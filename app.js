@@ -1,4 +1,3 @@
-require('dotenv').config()
 import express from 'express';
 import bodyParser from 'body-parser';
 import http from 'http';
@@ -7,6 +6,7 @@ import { getUsers } from './queries';
 // import { userRouter } from  './routers/userRouter';
 import * as path from 'path';
 
+// establish connection to db
 
 const app = express();
 
