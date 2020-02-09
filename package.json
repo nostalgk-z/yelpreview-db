@@ -27,9 +27,7 @@
     "morgan": "^1.9.1",
     "pg": "^7.17.1",
     "pg-hstore": "^2.3.3",
-    "pg-promise": "^10.3.5",
-    "sequelize": "^5.21.3",
-    "sequelize-cli": "^5.5.1"
+    "pg-promise": "^10.3.5"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

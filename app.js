@@ -5,10 +5,12 @@ import logger from 'morgan';
 import { getUsers } from './queries';
 // import { userRouter } from  './routers/userRouter';
 import * as path from 'path';
+import { db } from 'pg';
 
 // establish connection to db
 
 const app = express();
+
 
 class YelpReview{
     constructor(){
@@ -21,7 +23,7 @@ class YelpReview{
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(express.static(path.join(__dirname, 'public')));
-        app.get('/users', getUsers);
+        app.get('/users', getUsers); 
     }
 
     listen(port){
