@@ -1,16 +1,16 @@
-import * as express from "express";
-import { ResultCallback } from "../utils/resultsCallback";
+import express from "express";
 
 /**
 *  Router base class
 */
 export class BaseRouter {
 
-    router = express.Router();
-    
     constructor() {
         this.loadRoutes();
+        this.router = express.Router();
     }
-    
-    loadRoutes() {}
+
+    loadRoutes() {
+        return
+    }
 }

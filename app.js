@@ -6,6 +6,7 @@ import { getUsers } from './queries';
 // import { userRouter } from  './routers/userRouter';
 import * as path from 'path';
 import { db } from 'pg';
+import { businessRouter } from './router/BusinessRouter';
 
 // establish connection to db
 
@@ -15,7 +16,7 @@ const app = express();
 class YelpReview{
     constructor(){
         this.setup();
-        // this.loadRoutes();
+        this.loadRoutes();
     }
 
     setup(){
@@ -23,8 +24,13 @@ class YelpReview{
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(express.static(path.join(__dirname, 'public')));
-        app.get('/users', getUsers); 
+        // app.get('/users', getUsers); 
     }
+
+    loadRoutes(){
+        app.use('/', businessRouter);
+    }
+
 
     listen(port){
         // use env port or specified port

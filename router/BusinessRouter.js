@@ -1,20 +1,27 @@
-import * as mongoose from 'mongoose';
 import { BaseRouter } from './baseRouter';
-import { HttpStatus, MappedErrors } from '../utils/mappedErrors';
-import { FoldrError } from '../utils/foldrError';
-import * as jwt from "jsonwebtoken";
-import { userController } from '../controllers/userController';
-import { IUserModel } from '../models/userModel';
+import express from 'express';
+// import { userController } from '../controllers/userController';
+import { db } from '../pg';
 
 /**
 * A class representing all user routes
 */
-class UserRoute extends BaseRouter {
+class BusinessRouter {
+    constructor(){
+        this.router = express.Router();
+        this.loadRoutes();
+    }
 
     loadRoutes() {
-        console.log('loading user routes...');
-        this.router.post('/signup', (req, res) => {
-            console.log('Signup Route Hit.');
+        console.log('loading business routes...');
+        this.router.get('/business', (req, resp) => {
+            console.log('Business Route Hit.');
+
+            db.any('SELECT * FROM users', [true])
+            .then( res => console.log(res))
+            .catch( err => console.log(err));
         });
     }
 }
+
+export const businessRouter = new BusinessRouter().router;
