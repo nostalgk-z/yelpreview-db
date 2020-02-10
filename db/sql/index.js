@@ -7,6 +7,7 @@ export const users = {
 };
 export const business = {
     create: sql('business/create.sql'),
+    add: sql('business/add.sql'),
 }
 
 

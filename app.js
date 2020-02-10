@@ -28,6 +28,12 @@ class YelpReview{
 
     loadRoutes(){
         app.use('/', businessRouter);
+        app.get('/business/add/:name/:state/:city', req => {
+            return db.task('add-user', async t => {
+                const biz = await t.business.findByName(req.params.name);
+                return biz || t.business.add(req.params);
+            });
+        });
     }
 
 
@@ -39,7 +45,6 @@ class YelpReview{
         http.createServer(app).listen(configPort, () => {
             console.log('App listening on port ' +  configPort);
         });
-    
     }
 }
 

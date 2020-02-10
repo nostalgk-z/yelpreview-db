@@ -32,12 +32,13 @@ class BusinessRepository {
 
     // Adds a new record and returns the full object;
     // It is also an example of mapping HTTP requests into query parameters;
-    // async add(values) {
-    //     return this.db.one(sql.add, {
-    //         userId: +values.userId,
-    //         productName: values.name
-    //     });
-    // }
+    async add(values) {
+        return this.db.one(sql.add, {
+            name: values.name,
+            state: values.state,
+            city: values.city
+        });
+    }
 
     // Tries to delete a product by id, and returns the number of records deleted;
     // async remove(id) {
@@ -47,9 +48,13 @@ class BusinessRepository {
     // Tries to find a user product from user id + product name;
     async find(values) {
         // return this.db.oneOrNone(sql.find, {
-        //     userId: +values.userId,
+        //     name: +values.name,
         //     productName: values.name
         // });
+    }
+
+    async findByName(name) {
+        return this.db.oneOrNone('SELECT * FROM business WHERE name = $1', name);
     }
 
     // Returns all product records;
