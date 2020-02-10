@@ -1,6 +1,13 @@
+const { QueryFile } = require('pg-promise');
+const path = require('path');
+
+
 export const users = {
     create: sql('user/create.sql'),
 };
+export const business = {
+    create: sql('business/create.sql'),
+}
 
 
 ///////////////////////////////////////////////////

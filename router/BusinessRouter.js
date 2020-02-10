@@ -1,7 +1,6 @@
-import { BaseRouter } from './baseRouter';
 import express from 'express';
 // import { userController } from '../controllers/userController';
-import { db } from '../pg';
+import { db } from '../db/index';
 
 /**
 * A class representing all user routes

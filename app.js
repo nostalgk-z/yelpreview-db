@@ -2,11 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import http from 'http';
 import logger from 'morgan';
-import { getUsers } from './queries';
 // import { userRouter } from  './routers/userRouter';
 import * as path from 'path';
-import { db } from 'pg';
 import { businessRouter } from './router/BusinessRouter';
+import { db } from './db/index';
 
 // establish connection to db
 
@@ -24,7 +23,7 @@ class YelpReview{
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(express.static(path.join(__dirname, 'public')));
-        // app.get('/users', getUsers); 
+        db.business.create();
     }
 
     loadRoutes(){
