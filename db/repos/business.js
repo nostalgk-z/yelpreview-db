@@ -70,6 +70,29 @@ class BusinessRepository {
         return this.db.any('SELECT * FROM business');
     }
 
+    async findByState(state) {
+        return this.db.any('SELECT * FROM business WHERE state = $1 ORDER BY city', state);
+    }
+
+    async findByStateAndCity(state, city) {
+        return this.db.any('SELECT * from business WHERE state = $1 AND city = $2 ORDER BY name', state, city);
+    }
+
+    async getNumBusinessesInSameState(id) {
+        return this.db.one('SELECT count(*) FROM business ' +
+            'WHERE state = (SELECT state FROM business WHERE id = $1)',
+            id
+        )
+    }
+
+    async getNumBusinessesInSameCity(id) {
+        return this.db.one('SELECT count(*) FROM business ' +
+            'WHERE state = (SELECT state FROM business WHERE id = $1) ' +
+            'AND city = (SELECT city FROM business WHERE id = $1)',
+            id
+        );
+    }
+
     // Returns the total number of Business;
     async total() {
         return this.db.one('SELECT count(*) FROM business', [], a => +a.count);

@@ -17,10 +17,34 @@ class BusinessRouter {
 
 
         this.router.get('/business', (req, resp) => {
+            let state = req.query.state;
+            let promise;
+            if(state) {
+                let city = req.query.city;
+                if(city) {
+                    promise = db.business.findByStateAndCity(state, city);
+                } else {
+                    promise = db.business.findByState(state);
+                }
+            } else {
+                promise = db.business.all();
+            }
+
             console.log('Business Route Hit.');
-            db.any('SELECT * FROM business', [true])
-            .then( res => console.log(res))
+
+            promise
+            .then( res => resp.send(res))
             .catch( err => console.log(err));
+        });
+
+        this.router.get('/business_detail/:id', (req, resp) => {
+            let id = req.params.id;
+            let sameCityPromise = db.business.getNumBusinessesInSameCity(id);
+            let sameStatePromise = db.business.getNumBusinessesInSameState(id);
+            Promise.all([sameCityPromise, sameStatePromise]).then(result => {
+                let {numSameCity, numSameState} = result;
+                resp.send({'numSameCity': numSameCity, 'numSameState': numSameState});
+            })
         });
     }
 }
