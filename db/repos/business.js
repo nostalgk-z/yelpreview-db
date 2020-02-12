@@ -43,7 +43,7 @@ class BusinessRepository {
     async milestone1db(){
         return this.total().then(total =>
             total === 0
-                ? this.db.any("\copy business (id,name,state,city) FROM '/Users/zanepartain/WebApps/yelpreview-db/milestone1db.csv' DELIMITER ',' CSV", [true])
+                ? this.db.any("\copy business (id,name,state,city) FROM '/home/autopilot/WebstormProjects/yelpreview-db/milestone1db.csv' DELIMITER ',' CSV", [true])
                 : null
         ).then( res => console.log(res))
     }    
