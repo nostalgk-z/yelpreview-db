@@ -41,8 +41,11 @@ class BusinessRepository {
     }
 
     async milestone1db(){
-        return this.db.any("\copy business (id,name,state,city) FROM '/Users/zanepartain/WebApps/yelpreview-db/milestone1db.csv' DELIMITER ',' CSV", [true])
-        .then( res => console.log(res))
+        return this.total().then(total =>
+            total === 0
+                ? this.db.any("\copy business (id,name,state,city) FROM '/Users/zanepartain/WebApps/yelpreview-db/milestone1db.csv' DELIMITER ',' CSV", [true])
+                : null
+        ).then( res => console.log(res))
         .catch( err => console.log(err));
     }
     // Tries to delete a product by id, and returns the number of records deleted;
