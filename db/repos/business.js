@@ -75,7 +75,7 @@ class BusinessRepository {
     }
 
     async findByStateAndCity(state, city) {
-        return this.db.any('SELECT * from business WHERE state = $1 AND city = $2 ORDER BY name', state, city);
+        return this.db.any('SELECT * from business WHERE state = ${state} AND city = ${city} ORDER BY name', {'state': state, 'city': city});
     }
 
     async getNumBusinessesInSameState(id) {
