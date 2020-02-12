@@ -6,6 +6,8 @@ import logger from 'morgan';
 import * as path from 'path';
 import { businessRouter } from './router/BusinessRouter';
 import { db } from './db/index';
+import * as cors from 'cors';
+
 
 // establish connection to db
 
@@ -19,6 +21,11 @@ class YelpReview{
     }
 
     setup(){
+        app.use(function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
         app.use(logger('dev'));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: false }));
