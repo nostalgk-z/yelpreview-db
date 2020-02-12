@@ -41,7 +41,7 @@ class BusinessRepository {
     }
 
     async milestone1db(){
-        return db.any('\\copy business (business_id,name,state,city) FROM ' +  +' DELIMITER ',' CSV ', [true])
+        return this.db.any("\copy business (business_id, name,state,city) FROM ../../milestone1db.csv DELIMITER ',' CSV", [true])
         .then( res => console.log(res))
         .catch( err => console.log(err));
     }

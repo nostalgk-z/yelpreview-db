@@ -30,11 +30,14 @@ class YelpReview{
         app.use('/', businessRouter);
         app.get('/business/add/:name/:state/:city', req => {
             // TODO :: implement logic for getting a JSON in req.body
+            
             return db.task('add-business', async t => {
                 const biz = await t.business.findByName(req.params.name);
                 return biz || t.business.add(req.params);
             });
         });
+
+        db.business.milestone1db();
     }
 
 
