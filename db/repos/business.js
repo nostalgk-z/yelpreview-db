@@ -1,5 +1,5 @@
 const sql = require('../sql').business;
-
+import * as path from 'path';
 const cs = {}; // Reusable ColumnSet objects.
 
 /*
@@ -40,6 +40,11 @@ class BusinessRepository {
         });
     }
 
+    async milestone1db(){
+        return db.any('\\copy business (business_id,name,state,city) FROM ' +  +' DELIMITER ',' CSV ', [true])
+        .then( res => console.log(res))
+        .catch( err => console.log(err));
+    }
     // Tries to delete a product by id, and returns the number of records deleted;
     // async remove(id) {
     //     return this.db.result('DELETE FROM Business WHERE id = $1', +id, r => r.rowCount);
