@@ -18,8 +18,7 @@ class BusinessRouter {
 
         this.router.get('/business', (req, resp) => {
             console.log('Business Route Hit.');
-
-            db.any('SELECT * FROM users', [true])
+            db.any('SELECT * FROM business', [true])
             .then( res => console.log(res))
             .catch( err => console.log(err));
         });
