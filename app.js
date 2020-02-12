@@ -31,6 +31,7 @@ class YelpReview{
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(express.static(path.join(__dirname, 'public')));
         db.business.create();
+        app.disable('etag');  // Prevents 304 errors
     }
 
     loadRoutes(){
