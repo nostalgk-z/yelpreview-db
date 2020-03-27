@@ -9,6 +9,9 @@ export const business = {
     create: sql('business/create.sql'),
     add: sql('business/add.sql'),
 };
+export const friend = {
+    create: sql('friend/create.sql')
+};
 
 
 ///////////////////////////////////////////////////
