@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS Users (
     tip_count     INTEGER     NOT NULL,
     funny         INTEGER     NOT NULL,
     total_likes   INTEGER     NOT NULL,
-    num_likes     INTEGER,
     longitude     REAL,
     latitude      REAL
 );
