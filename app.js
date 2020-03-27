@@ -30,7 +30,11 @@ class YelpReview{
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: false }));
         app.use(express.static(path.join(__dirname, 'public')));
+
+        // create tables
         db.business.create();
+        db.users.create();
+
         app.disable('etag');  // Prevents 304 errors
     }
 
