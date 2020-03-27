@@ -15,18 +15,23 @@ class BusinessRouter {
     loadRoutes() {
         console.log('loading business routes...');
 
-
         this.router.get('/business', (req, resp) => {
             let state = req.query.state;
             let promise;
-            if(state) {
+            if(state) 
+            {
                 let city = req.query.city;
-                if(city) {
+                if(city) 
+                {
                     promise = db.business.findByStateAndCity(state, city);
-                } else {
+                } 
+                else 
+                {
                     promise = db.business.findByState(state);
                 }
-            } else {
+            } 
+            else 
+            {
                 promise = db.business.all();
             }
 
@@ -41,11 +46,14 @@ class BusinessRouter {
             let id = req.params.id;
             let sameCityPromise = db.business.getNumBusinessesInSameCity(id);
             let sameStatePromise = db.business.getNumBusinessesInSameState(id);
-            Promise.all([sameCityPromise, sameStatePromise]).then(result => {
+
+            Promise.all([sameCityPromise, sameStatePromise])
+            .then(result => {
                 let numSameCity = result[0].count;
                 let numSameState = result[1].count;
                 resp.send({'numSameCity': numSameCity, 'numSameState': numSameState});
-            }).catch( err => console.log(err))
+            })
+            .catch( err => console.log(err))
         });
     }
 }

@@ -45,7 +45,7 @@ class YelpReview{
             });
         });
 
-        db.business.milestone1db();
+        //db.business.milestone1db();
     }
 
 
