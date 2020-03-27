@@ -15,6 +15,9 @@ export const friend = {
 export const category = {
     create: sql('category/create.sql')
 };
+export const hascategory = {
+    create: sql('hascategory/create.sql')
+};
 
 ///////////////////////////////////////////////////
 /// Helper for linking to external query files; ///

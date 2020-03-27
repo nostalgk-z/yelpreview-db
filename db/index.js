@@ -2,6 +2,7 @@ import { user, password, database, port, host } from '../config';
 import UserRepository from './repos/users';
 import BusinessRepository from './repos/business';
 import CategoryRepository from './repos/category';
+import HasCategoryRepository from './repos/hascategory';
 const pgPromise = require('pg-promise');
 
 const initOptions = {
@@ -9,6 +10,7 @@ const initOptions = {
         obj.users = new UserRepository(obj,pgp);
         obj.business = new BusinessRepository(obj,pgp);
         obj.category = new CategoryRepository(obj, pgp);
+        obj.hasCategory = new HasCategoryRepository(obj, pgp);
     }
 }
 
