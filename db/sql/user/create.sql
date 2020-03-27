@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS Users (
-    id CHAR(22)   PRIMARY KEY,
+    id            CHAR(22)    PRIMARY KEY,
     name          TEXT        NOT NULL,
     avg_stars     FLOAT       NOT NULL,
     cool          INTEGER     NOT NULL,

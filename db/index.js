@@ -4,6 +4,7 @@ import BusinessRepository from './repos/business';
 import CategoryRepository from './repos/category';
 import HasCategoryRepository from './repos/hascategory';
 import CheckInRepository from './repos/checkin';
+import TipRepository from './repos/tip';
 const pgPromise = require('pg-promise');
 
 const initOptions = {
@@ -13,6 +14,7 @@ const initOptions = {
         obj.category = new CategoryRepository(obj, pgp);
         obj.hasCategory = new HasCategoryRepository(obj, pgp);
         obj.checkIn = new CheckInRepository(obj, pgp);
+        obj.tip = new TipRepository(obj, pgp);
     }
 }
 

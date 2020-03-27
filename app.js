@@ -37,6 +37,7 @@ class YelpReview{
         db.category.create();
         db.hasCategory.create();
         db.checkIn.create();
+        db.tip.create();
 
         app.disable('etag');  // Prevents 304 errors
     }

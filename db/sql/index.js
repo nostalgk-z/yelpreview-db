@@ -21,6 +21,9 @@ export const hascategory = {
 export const checkin = {
     create: sql('checkin/create.sql')
 };
+export const tip = {
+    create: sql('tip/create.sql')
+};
 
 ///////////////////////////////////////////////////
 /// Helper for linking to external query files; ///
