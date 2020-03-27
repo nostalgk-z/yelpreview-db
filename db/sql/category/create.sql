@@ -1,4 +1,6 @@
 CREATE TABLE IF NOT EXISTS Category (
-	id SERIAL PRIMARY KEY,
-	type      TEXT   UNIQUE       NOT NULL
+	id   SERIAL,
+	type TEXT,
+
+	PRIMARY KEY (id, type)
 );
