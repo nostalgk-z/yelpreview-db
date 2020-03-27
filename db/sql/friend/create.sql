@@ -1,5 +1,5 @@
 CREATE TABLE Friend (
-    user   INTEGER REFERENCES User(user_id),
-    friend INTEGER REFERENCES User(user_id),
-    PRIMARY KEY (user,friend) -- implied cannot be null
+    user_id CHAR(22) REFERENCES Users(id),
+    friend  CHAR(22) REFERENCES Users(id),
+    PRIMARY KEY (user_id,friend) -- implied cannot be null
 )
