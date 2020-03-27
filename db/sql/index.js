@@ -12,7 +12,9 @@ export const business = {
 export const friend = {
     create: sql('friend/create.sql')
 };
-
+export const category = {
+    create: sql('category/create.sql')
+};
 
 ///////////////////////////////////////////////////
 /// Helper for linking to external query files; ///
