@@ -6,6 +6,7 @@ import HasCategoryRepository from './repos/hascategory';
 import CheckInRepository from './repos/checkin';
 import TipRepository from './repos/tip';
 import FriendRepository from './repos/friend';
+import HoursRepository from './repos/hours';
 const pgPromise = require('pg-promise');
 
 const initOptions = {
@@ -17,6 +18,7 @@ const initOptions = {
         obj.checkIn = new CheckInRepository(obj, pgp);
         obj.tip = new TipRepository(obj, pgp);
         obj.friend = new FriendRepository(obj, pgp);
+        obj.hours = new HoursRepository(obj, pgp);
     }
 }
 

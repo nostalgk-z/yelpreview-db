@@ -24,6 +24,10 @@ export const checkin = {
 export const tip = {
     create: sql('tip/create.sql')
 };
+export const hours = {
+    create: sql('hours/create.sql')
+};
+
 
 ///////////////////////////////////////////////////
 /// Helper for linking to external query files; ///
