@@ -58,6 +58,15 @@ class CategoryRepository {
     async total() {
         return this.db.one('SELECT count(*) FROM category', [], a => +a.count);
     }
+
+    async getCategoriesForPostalCode(postalCode) {
+        return this.db.any(
+            'SELECT DISTINCT Category.type\n' +
+            'FROM Business\n' +
+            '    INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
+            '    INNER JOIN Category ON (HasCategory.category = Category.id)\n' +
+            'WHERE Business.postal_code = ${postalCode}', {'postalCode': postalCode})
+    }
 }
 
 //////////////////////////////////////////////////////////

@@ -120,6 +120,14 @@ class BusinessRouter {
             })
             .catch( err => console.log(err))
         });
+
+        this.router.get('/category/:postalCode', (req, resp) => {
+            let postalCode = req.params.postalCode;
+
+            db.category.getCategoriesForPostalCode(postalCode).then(result =>{
+                resp.send(result);
+            });
+        });
     }
 }
 
