@@ -1,6 +1,7 @@
 import express from 'express';
 // import { userController } from '../controllers/userController';
 import { db } from '../db/index';
+import bodyParser from 'body-parser';
 
 /**
 * A class representing all user routes
@@ -15,27 +16,42 @@ class BusinessRouter {
     loadRoutes() {
         console.log('loading business routes...');
 
-        this.router.get('/business', (req, resp) => {
-            let state = req.query.state;
+        this.router.post('/business', (req, resp) => {
+            console.log('Business State Route Hit.');
+            let states = req.body.states;
             let promise;
-            if(state) 
+
+            if(states) 
             {
-                let city = req.query.city;
-                if(city) 
-                {
-                    promise = db.business.findByStateAndCity(state, city);
-                } 
-                else 
-                {
-                    promise = db.business.findByState(state);
-                }
+                promise = db.business.findByStates(states);
             } 
             else 
             {
                 promise = db.business.all();
             }
 
-            console.log('Business Route Hit.');
+            promise
+            .then( res => resp.send(res))
+            .catch( err => console.log(err));
+        });
+
+        this.router.get('/business/:state/:city', (req, resp) => {
+            let state = req.params.state;
+            let city = req.params.city;
+            let promise;
+            if(state) 
+            {
+                if(city) 
+                {
+                    promise = db.business.findByStateAndCity(state, city);
+                } 
+            } 
+            else 
+            {
+                promise = db.business.all();
+            }
+
+            console.log('Business City Route Hit.');
 
             promise
             .then( res => resp.send(res))

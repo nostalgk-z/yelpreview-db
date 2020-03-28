@@ -74,6 +74,10 @@ class BusinessRepository {
         return this.db.any('SELECT * FROM business WHERE state = $1 ORDER BY city', state);
     }
 
+    async findByStates(states) {
+        return this.db.any('SELECT * FROM business WHERE state IN ($1:list) ORDER BY city', [states]);
+    }
+
     async findByStateAndCity(state, city) {
         return this.db.any('SELECT * from business WHERE state = ${state} AND city = ${city} ORDER BY name', {'state': state, 'city': city});
     }
