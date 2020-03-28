@@ -78,6 +78,10 @@ class BusinessRepository {
         return this.db.any('SELECT DISTINCT city FROM business WHERE state IN ($1:list) ORDER BY city', [states]);
     }
 
+    async findBusinessByPostalCode(code){
+        return this.db.any('SELECT * FROM business WHERE postal_code = ${code}', {'code': code});
+    }
+
     async findPostalCodeByCity(city) {
         return this.db.any('SELECT DISTINCT postal_code FROM business WHERE city = ${city}', {'city': city});
     }

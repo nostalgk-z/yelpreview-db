@@ -66,6 +66,23 @@ class BusinessRouter {
             }
         });
 
+        // Query all of the businesses given a zip code
+        this.router.get('/business/list/:postalCode', (req, resp) => {
+            console.log('Businesses Code Route Hit');
+
+            let postalCode = req.params.postalCode;
+            let promise;
+            if (postalCode) {
+                promise = db.business.findBusinessByPostalCode(postalCode);
+                promise
+                    .then ( res => resp.send(res) )
+                    .catch ( err => console.log(err) );
+            }
+            else{
+                resp.send({ code: 107, message: "Invalid url param data provided." });
+            }
+        })
+
         // Query all of the businesses given the state and city 
         this.router.get('/business/:state/:city', (req, resp) => {
             console.log('Business City Route Hit.');
