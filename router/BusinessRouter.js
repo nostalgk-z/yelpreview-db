@@ -16,26 +16,43 @@ class BusinessRouter {
     loadRoutes() {
         console.log('loading business routes...');
 
+        // Query all of the cities in the list of provided states
         this.router.post('/business', (req, resp) => {
-            console.log('Business State Route Hit.');
+            console.log('Business Route Hit.');
             let states = req.body.states;
             let promise;
 
             if(states) 
             {
-                promise = db.business.findByStates(states);
-            } 
-            else 
-            {
-                promise = db.business.all();
+                promise = db.business.findCitiesByStates(states);
+                promise
+                .then( res => resp.send(res))
+                .catch( err => console.log(err));
             }
-
-            promise
-            .then( res => resp.send(res))
-            .catch( err => console.log(err));
+            else{
+                resp.send({ code: 105, message: "Invalid post data provided." });
+            }
+           
         });
 
+        // Query all of the states that have a business in them
+        this.router.get('/business/states', (req, resp) => {
+            console.log('Business State Route Hit.');
+            let promise;
+
+            promise = db.business.allStates();
+            promise
+            .then( res => resp.send(res))
+            .catch( err => {
+                console.log(err);
+                resp.send({ code: 106, message: "Query did not work" });
+            });
+        });
+
+        // Query all of the businesses given the state and city 
         this.router.get('/business/:state/:city', (req, resp) => {
+            console.log('Business City Route Hit.');
+
             let state = req.params.state;
             let city = req.params.city;
             let promise;
@@ -44,20 +61,18 @@ class BusinessRouter {
                 if(city) 
                 {
                     promise = db.business.findByStateAndCity(state, city);
+                    promise
+                    .then( res => resp.send(res))
+                    .catch( err => console.log(err));
                 } 
             } 
             else 
             {
-                promise = db.business.all();
+                resp.send({ code: 105, message: "Invalid post data provided." });
             }
-
-            console.log('Business City Route Hit.');
-
-            promise
-            .then( res => resp.send(res))
-            .catch( err => console.log(err));
         });
 
+        // Query the detailf of the given business
         this.router.get('/business_detail/:id', (req, resp) => {
             let id = req.params.id;
             let sameCityPromise = db.business.getNumBusinessesInSameCity(id);
