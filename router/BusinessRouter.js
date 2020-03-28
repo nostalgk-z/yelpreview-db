@@ -49,6 +49,23 @@ class BusinessRouter {
             });
         });
 
+        // Query the postal codes given the city
+        this.router.get('/business/:city', (req, resp) =>{
+            console.log('Business Postal Code Route Hit. ');
+            let city = req.params.city;
+            let promise;
+
+            if (city){
+                promise = db.business.findPostalCodeByCity(city);
+                promise
+                    .then( res => resp.send(res))
+                    .catch( err => console.log(err));
+            }
+            else{
+                resp.send({ code: 105, message: "Invalid post data provided." });
+            }
+        });
+
         // Query all of the businesses given the state and city 
         this.router.get('/business/:state/:city', (req, resp) => {
             console.log('Business City Route Hit.');
@@ -62,8 +79,8 @@ class BusinessRouter {
                 {
                     promise = db.business.findByStateAndCity(state, city);
                     promise
-                    .then( res => resp.send(res))
-                    .catch( err => console.log(err));
+                        .then( res => resp.send(res))
+                        .catch( err => console.log(err));
                 } 
             } 
             else 
