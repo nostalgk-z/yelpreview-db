@@ -75,7 +75,7 @@ class BusinessRepository {
     }
 
     async findCitiesByStates(states) {
-        return this.db.any('SELECT * FROM business WHERE state IN ($1:list) ORDER BY city', [states]);
+        return this.db.any('SELECT DISTINCT city FROM business WHERE state IN ($1:list) ORDER BY city', [states]);
     }
 
     async findByStateAndCity(state, city) {
