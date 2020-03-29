@@ -124,10 +124,28 @@ class BusinessRouter {
         this.router.get('/category/:postalCode', (req, resp) => {
             let postalCode = req.params.postalCode;
 
-            db.category.getCategoriesForPostalCode(postalCode).then(result =>{
+            db.category.getCategoriesForPostalCode(postalCode).then(result => {
                 resp.send(result);
             });
         });
+
+        this.router.get('/business/postalCode/:postalCode/category/:category', (req, resp) => {
+            let postalCode = req.params.postalCode;
+            let category = req.params.category;
+
+            db.business.getBusinessesByCategoryAndPostalCode(category, postalCode).then( result => {
+                resp.send(result);
+            });
+        })
+
+        this.router.post('/business/categoryFilter/:postalCode', (req, resp) => {
+            let postalCode = req.params.postalCode;
+            let categories = req.body.categories;
+
+            db.business.getBusinessesCategoryFilter(categories, postalCode).then(result => {
+                resp.send(result);
+            })
+        })
     }
 }
 

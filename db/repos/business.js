@@ -109,6 +109,29 @@ class BusinessRepository {
     async total() {
         return this.db.one('SELECT count(*) FROM business', [], a => +a.count);
     }
+
+    async getBusinessesByCategoryAndPostalCode(category, postalCode) {
+        return this.db.any(
+            'SELECT Business.*\n' +
+            'FROM Business\n' +
+            '    INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
+            '    INNER JOIN Category ON (Category.id = HasCategory.category)\n' +
+            'WHERE Category.type = ${category}' +
+            '    AND Business.postal_code = ${postalCode}',
+            {'category': category, 'postalCode': postalCode})
+    }
+
+    async getBusinessesCategoryFilter(categories, postalCode) {
+        return this.db.any(
+            'SELECT Business.*\n' +
+            'FROM Business\n' +
+            '    INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
+            '    INNER JOIN Category ON (Category.id = HasCategory.category)\n' +
+            'WHERE Category.type IN ${categories:list}\n' +
+            '    AND Business.postal_code = ${postalCode}',
+            {'categories': categories, 'postalCode': postalCode}
+        )
+    }
 }
 
 //////////////////////////////////////////////////////////
