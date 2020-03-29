@@ -127,7 +127,7 @@ class BusinessRepository {
             'FROM Business\n' +
             '    INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
             '    INNER JOIN Category ON (Category.id = HasCategory.category)\n' +
-            'WHERE Category.type IN ${categories:list}\n' +
+            'WHERE Category.type IN (${categories:list})\n' +
             '    AND Business.postal_code = ${postalCode}',
             {'categories': categories, 'postalCode': postalCode}
         )
