@@ -138,8 +138,8 @@ class BusinessRouter {
             });
         })
 
-        this.router.post('/business/categoryFilter/:postalCode', (req, resp) => {
-            let postalCode = req.params.postalCode;
+        this.router.post('/business/categoryFilter', (req, resp) => {
+            let postalCode = req.body.postalCode;
             let categories = req.body.categories;
 
             db.business.getBusinessesCategoryFilter(categories, postalCode).then(result => {
