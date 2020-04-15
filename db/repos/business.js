@@ -125,10 +125,16 @@ class BusinessRepository {
         return this.db.any(
             'SELECT Business.*\n' +
             'FROM Business\n' +
-            '    INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
-            '    INNER JOIN Category ON (Category.id = HasCategory.category)\n' +
-            'WHERE Category.type IN (${categories:list})\n' +
-            '    AND Business.postal_code = ${postalCode}',
+            'WHERE Business.id in (\n' +
+            '    SELECT Business.id\n' +
+            '    FROM Business\n' +
+            '        INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
+            '        INNER JOIN Category ON (Category.id = HasCategory.category)\n' +
+            '    WHERE Category.type IN (${categories:list})\n' +
+            '        AND Business.postal_code = ${postalCode}\n' +
+            '    GROUP BY Business.id\n' +
+            '    HAVING count(*) = ${categories.length}\n' +
+            ')',
             {'categories': categories, 'postalCode': postalCode}
         )
     }
