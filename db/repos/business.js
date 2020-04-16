@@ -125,7 +125,7 @@ class BusinessRepository {
         return this.db.any(
             'SELECT Business.*\n' +
             'FROM Business\n' +
-            'WHERE Business.id in (\n' +
+            'WHERE Business.id IN (\n' +
             '    SELECT Business.id\n' +
             '    FROM Business\n' +
             '        INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
