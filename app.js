@@ -33,7 +33,7 @@ class YelpReview{
 
         // create tables
         db.business.create();
-        db.users.create();
+        db.user.create();
         db.category.create();
         db.hasCategory.create();
         db.checkIn.create();

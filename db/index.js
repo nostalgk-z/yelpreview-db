@@ -11,8 +11,8 @@ const pgPromise = require('pg-promise');
 
 const initOptions = {
     extend(obj, dc) {
-        obj.users = new UserRepository(obj,pgp);
-        obj.business = new BusinessRepository(obj,pgp);
+        obj.user = new UserRepository(obj, pgp);
+        obj.business = new BusinessRepository(obj, pgp);
         obj.category = new CategoryRepository(obj, pgp);
         obj.hasCategory = new HasCategoryRepository(obj, pgp);
         obj.checkIn = new CheckInRepository(obj, pgp);
