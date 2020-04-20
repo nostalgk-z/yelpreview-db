@@ -17,7 +17,7 @@ class BusinessRouter {
         console.log('loading business routes...');
 
         // Query all of the cities in the list of provided states
-        this.router.post('/business', (req, resp) => {
+        this.router.post('/byStates', (req, resp) => {
             console.log('Business Route Hit.');
             let states = req.body.states;
             let promise;
@@ -36,7 +36,7 @@ class BusinessRouter {
         });
 
         // Query all of the states that have a business in them
-        this.router.get('/business/states', (req, resp) => {
+        this.router.get('/states', (req, resp) => {
             console.log('Business State Route Hit.');
             let promise;
 
@@ -50,7 +50,7 @@ class BusinessRouter {
         });
 
         // Query the postal codes given the city
-        this.router.get('/business/:city', (req, resp) =>{
+        this.router.get('/postalCodesInCity/:city', (req, resp) =>{
             console.log('Business Postal Code Route Hit. ');
             let city = req.params.city;
             let promise;
@@ -67,7 +67,7 @@ class BusinessRouter {
         });
 
         // Query all of the businesses given a zip code
-        this.router.get('/business/list/:postalCode', (req, resp) => {
+        this.router.get('/inPostalCode/:postalCode', (req, resp) => {
             console.log('Businesses Code Route Hit');
 
             let postalCode = req.params.postalCode;
@@ -84,7 +84,7 @@ class BusinessRouter {
         })
 
         // Query all of the businesses given the state and city 
-        this.router.get('/business/:state/:city', (req, resp) => {
+        this.router.get('/byStateAndCity/:state/:city', (req, resp) => {
             console.log('Business City Route Hit.');
 
             let state = req.params.state;
@@ -107,7 +107,7 @@ class BusinessRouter {
         });
 
         // Query the detailf of the given business
-        this.router.get('/business_detail/:id', (req, resp) => {
+        this.router.get('/detail/:id', (req, resp) => {
             let id = req.params.id;
             let sameCityPromise = db.business.getNumBusinessesInSameCity(id);
             let sameStatePromise = db.business.getNumBusinessesInSameState(id);
@@ -121,15 +121,7 @@ class BusinessRouter {
             .catch( err => console.log(err))
         });
 
-        this.router.get('/category/:postalCode', (req, resp) => {
-            let postalCode = req.params.postalCode;
-
-            db.category.getCategoriesForPostalCode(postalCode).then(result => {
-                resp.send(result);
-            });
-        });
-
-        this.router.get('/business/postalCode/:postalCode/category/:category', (req, resp) => {
+        this.router.get('/postalCode/:postalCode/category/:category', (req, resp) => {
             let postalCode = req.params.postalCode;
             let category = req.params.category;
 
@@ -138,7 +130,7 @@ class BusinessRouter {
             });
         })
 
-        this.router.post('/business/categoryFilter', (req, resp) => {
+        this.router.post('/categoryFilter', (req, resp) => {
             let postalCode = req.body.postalCode;
             let categories = req.body.categories;
 

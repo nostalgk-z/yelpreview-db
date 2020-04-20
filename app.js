@@ -2,11 +2,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import http from 'http';
 import logger from 'morgan';
-// import { userRouter } from  './routers/userRouter';
+import { userRouter } from  './router/UserRouter';
 import * as path from 'path';
 import { businessRouter } from './router/BusinessRouter';
 import { db } from './db/index';
 import * as cors from 'cors';
+import { categoryRouter } from "./router/CategoryRouter";
 
 
 // establish connection to db
@@ -45,7 +46,9 @@ class YelpReview{
     }
 
     loadRoutes(){
-        app.use('/', businessRouter);
+        app.use('/business', businessRouter);
+        app.use('/user', userRouter);
+        app.use('/category', categoryRouter);
         app.get('/business/add/:name/:state/:city', req => {
             // TODO :: implement logic for getting a JSON in req.body
             
