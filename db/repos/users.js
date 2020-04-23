@@ -51,7 +51,7 @@ class UsersRepository {
 
     // Tries to find a user from name;
     async findByName(name) {
-        return this.db.oneOrNone('SELECT * FROM users WHERE name = $1', name);
+        return this.db.any('SELECT * FROM users WHERE name = $1', name);
     }
 
     // Returns all user records;

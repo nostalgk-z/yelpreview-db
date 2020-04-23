@@ -9,7 +9,7 @@ class UserRouter {
     }
 
     loadRoutes() {
-        this.router.get('/by_name/:name', (req, resp) => {
+        this.router.get('/byName/:name', (req, resp) => {
             let name = req.params.name;
             db.user.findByName(name)
                 .then((users) => resp.send(users))
