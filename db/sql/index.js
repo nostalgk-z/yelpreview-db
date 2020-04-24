@@ -22,7 +22,8 @@ export const checkin = {
     create: sql('checkin/create.sql')
 };
 export const tip = {
-    create: sql('tip/create.sql')
+    create: sql('tip/create.sql'),
+    latestByUser: sql('tip/latestByUser.sql')
 };
 export const hours = {
     create: sql('hours/create.sql')

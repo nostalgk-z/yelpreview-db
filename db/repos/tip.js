@@ -58,6 +58,10 @@ class TipRepository {
     async total() {
         return this.db.one('SELECT count(*) FROM tip', [], a => +a.count);
     }
+
+    async latestByUser(userID) {
+        return this.db.oneOrNone(sql.latestByUser, {'userID': userID})
+    }
 }
 
 //////////////////////////////////////////////////////////

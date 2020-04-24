@@ -58,6 +58,10 @@ class FriendRepository {
     async total() {
         return this.db.one('SELECT count(*) FROM friend', [], a => +a.count);
     }
+
+    async friendsOf(userID) {
+        return this.db.any(sql.friendsOf, {'userID': userID});
+    }
 }
 
 //////////////////////////////////////////////////////////

@@ -8,6 +8,8 @@ import { businessRouter } from './router/BusinessRouter';
 import { db } from './db/index';
 import * as cors from 'cors';
 import { categoryRouter } from "./router/CategoryRouter";
+import {tipRouter} from "./router/TipRouter";
+import {friendRouter} from "./router/FriendRouter";
 
 
 // establish connection to db
@@ -49,6 +51,8 @@ class YelpReview{
         app.use('/business', businessRouter);
         app.use('/user', userRouter);
         app.use('/category', categoryRouter);
+        app.use('/tip', tipRouter);
+        app.use('/friend', friendRouter);
         app.get('/business/add/:name/:state/:city', req => {
             // TODO :: implement logic for getting a JSON in req.body
             
