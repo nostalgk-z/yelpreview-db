@@ -110,15 +110,16 @@ class BusinessRouter {
         this.router.get('/detail/:id', (req, resp) => {
             let id = req.params.id;
             let bizCategories = db.business.getBusinessCategories(id);
-            //let sameStatePromise = db.business.getNumBusinessesInSameState(id);
+            let bizHours = db.business.getBusinessHours(id);
             
 
-            Promise.all([bizCategories])
+            Promise.all([bizCategories, bizHours])
             .then(result => {
-                console.log(result);
+                console.log(result[0]);
+                console.log(result[1]);
                 // let numSameCity = result[0].count;
                 // let numSameState = result[1].count;
-                //resp.send({'numSameCity': numSameCity, 'numSameState': numSameState});
+                resp.send({'categories': result[0], 'hours': result[1]});
             })
             .catch( err => console.log(err))
         });
