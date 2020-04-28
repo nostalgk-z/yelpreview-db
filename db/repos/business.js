@@ -106,13 +106,22 @@ class BusinessRepository {
     }
 
     async getBusinessCategories(id){
-        return this.db.one(
+        return this.db.many(
             'SELECT Category.type\n' +
             'FROM Business\n' +
             '    INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
             '    INNER JOIN Category ON (Category.id = HasCategory.category)\n' +
             'WHERE Business.id = ${id}',
-            id
+            {'id': id}
+        );
+    }
+
+    async getBusinessHours(id){
+        return this.db.many(
+            'SELECT Hours.day_of_week, Hours.open, Hours.close\n' +
+            'FROM Business Inner Join Hours On (Business.id = Hours.business)\n' +
+            'WHERE Business.id = ${id}',
+            {'id': id}
         );
     }
 
