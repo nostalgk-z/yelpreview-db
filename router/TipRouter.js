@@ -13,8 +13,10 @@ class TipRouter {
             let userID = req.params.userID;
 
             db.tip.latestByUser(userID).then((res) => {
+                console.log(userID);
+                console.log(res);
                 resp.send(res);
-            })
+            }).catch(console.log)
         });
     }
 }

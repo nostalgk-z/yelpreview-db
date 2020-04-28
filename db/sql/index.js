@@ -10,7 +10,8 @@ export const business = {
     add: sql('business/add.sql'),
 };
 export const friend = {
-    create: sql('friend/create.sql')
+    create: sql('friend/create.sql'),
+    friendsOf: sql('friend/friendsOf.sql')
 };
 export const category = {
     create: sql('category/create.sql')
