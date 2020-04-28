@@ -23,7 +23,7 @@ BEGIN
     delta_lat = lat2_rad - lat1_rad;
     delta_lon = lon2_rad - lon1_rad;
 
-    angle = 2 * asin(sqrt(
+    angle = 2.0 * asin(sqrt(
         (sin(delta_lat/2) * sin(delta_lat/2))
         + (cos(lat1_rad) * cos(lat2_rad)
         * sin(delta_lon/2) * sin(delta_lon/2))));
