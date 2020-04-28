@@ -15,6 +15,16 @@ class UserRouter {
                 .then((users) => resp.send(users))
                 .catch(err => console.log(err));
         })
+
+        this.router.put('/setLocation/:userID/:latitude/:longitude', (req, resp) => {
+            let userID = req.params.userID;
+            let latitude = req.params.latitude;
+            let longitude = req.params.longitude;
+            db.user.updateLocation(userID, latitude, longitude)
+                .then(db.user.findById(userID))
+                .then((user) => resp.send(user))
+                .catch(err => console.log(err))
+        })
     }
 }
 

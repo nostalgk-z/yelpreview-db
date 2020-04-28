@@ -63,6 +63,12 @@ class UsersRepository {
     async total() {
         return this.db.one('SELECT count(*) FROM users', [], a => +a.count);
     }
+
+    async updateLocation(userID, latitude, longitude) {
+        return this.db.none(
+            'UPDATE users SET latitude = ${latitude}, longitude = ${longitude} WHERE id = ${id}',
+            {latitude: latitude, longitude: longitude, id: userID})
+    }
 }
 
 //////////////////////////////////////////////////////////
