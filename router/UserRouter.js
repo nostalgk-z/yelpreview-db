@@ -21,9 +21,6 @@ class UserRouter {
             let latitude = req.params.latitude;
             let longitude = req.params.longitude;
             db.user.updateLocation(userID, latitude, longitude)
-                .then(db.user.findById(userID))
-                .then((user) => resp.send(user))
-                .catch(err => console.log(err))
         })
     }
 }
