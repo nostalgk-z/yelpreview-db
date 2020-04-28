@@ -109,14 +109,16 @@ class BusinessRouter {
         // Query the detailf of the given business
         this.router.get('/detail/:id', (req, resp) => {
             let id = req.params.id;
-            let sameCityPromise = db.business.getNumBusinessesInSameCity(id);
-            let sameStatePromise = db.business.getNumBusinessesInSameState(id);
+            let bizCategories = db.business.getBusinessCategories(id);
+            //let sameStatePromise = db.business.getNumBusinessesInSameState(id);
+            
 
-            Promise.all([sameCityPromise, sameStatePromise])
+            Promise.all([bizCategories])
             .then(result => {
-                let numSameCity = result[0].count;
-                let numSameState = result[1].count;
-                resp.send({'numSameCity': numSameCity, 'numSameState': numSameState});
+                console.log(result);
+                // let numSameCity = result[0].count;
+                // let numSameState = result[1].count;
+                //resp.send({'numSameCity': numSameCity, 'numSameState': numSameState});
             })
             .catch( err => console.log(err))
         });

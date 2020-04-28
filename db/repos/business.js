@@ -105,6 +105,17 @@ class BusinessRepository {
         );
     }
 
+    async getBusinessCategories(id){
+        return this.db.one(
+            'SELECT Category.type\n' +
+            'FROM Business\n' +
+            '    INNER JOIN HasCategory ON (Business.id = HasCategory.business)\n' +
+            '    INNER JOIN Category ON (Category.id = HasCategory.category)\n' +
+            'WHERE Business.id = ${id}',
+            id
+        );
+    }
+
     // Returns the total number of Business;
     async total() {
         return this.db.one('SELECT count(*) FROM business', [], a => +a.count);
